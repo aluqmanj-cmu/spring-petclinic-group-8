@@ -1,8 +1,7 @@
 pipeline {
-    agent {
-        docker {
-            image 'maven:3.8.5-openjdk-11'
-        }
+    agent any
+    tools {
+        maven 'maven-system' 
     }
 
     stages {

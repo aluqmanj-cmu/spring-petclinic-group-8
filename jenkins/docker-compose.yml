@@ -1,6 +1,6 @@
 services:
   jenkins:
-    image: jenkins/jenkins:lts-jdk11
+    image: jenkins/jnlp-agent-maven:windows-nanoserver-jdk11
     container_name: jenkins
     privileged: true
     user: root
