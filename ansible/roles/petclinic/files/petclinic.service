@@ -1,0 +1,12 @@
+[Unit]
+Description=Spring PetClinic
+After=network.target
+
+[Service]
+User=root
+WorkingDirectory=/opt/spring-petclinic
+ExecStart=/usr/bin/java -jar target/spring-petclinic-3.4.0-SNAPSHOT.jar --server.address=0.0.0.0
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,36 @@
+- name: Install dependencies
+  ansible.builtin.apt:
+    name:
+      - openjdk-17-jdk
+      - git
+      - maven
+    update_cache: true
+
+- name: Allow port 8080 in firewall
+  ansible.builtin.ufw:
+    rule: allow
+    port: '8080'
+    proto: tcp
+
+- name: Clone repository
+  ansible.builtin.git:
+    repo: https://github.com/spring-projects/spring-petclinic.git
+    dest: /opt/spring-petclinic
+
+- name: Build application
+  ansible.builtin.shell:
+    cmd: ./mvnw package
+  args:
+    chdir: /opt/spring-petclinic
+
+- name: Install systemd service
+  ansible.builtin.copy:
+    src: petclinic.service
+    dest: /etc/systemd/system/petclinic.service
+    mode: 0644
+
+- name: Enable service
+  ansible.builtin.systemd:
+    name: petclinic
+    enabled: true
+    state: restarted

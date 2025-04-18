@@ -1,0 +1,6 @@
+- name: Deploy Spring PetClinic
+  hosts: webservers
+  become: true
+  gather_facts: false
+  roles:
+    - petclinic
